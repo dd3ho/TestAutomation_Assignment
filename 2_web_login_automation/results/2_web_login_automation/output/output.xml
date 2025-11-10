@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.14.0 on darwin)" generated="2025-11-10T02:29:17.569019" rpa="false" schemaversion="5">
+<suite id="s1" name="Login Test" source="/Users/paxnchu/Desktop/TestAutomation_Assignment/2_web_login_automation/login_test.robot">
+<kw name="Set Screenshot Directory" owner="SeleniumLibrary" type="SETUP">
+<arg>2_web_login_automation/results</arg>
+<doc>Sets the directory for captured screenshots.</doc>
+<status status="PASS" start="2025-11-10T02:29:17.640808" elapsed="0.000145"/>
+</kw>
+<test id="s1-t1" name="Login Success" line="25">
+<kw name="Login And Verify">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:17.641407" level="INFO">Opening browser 'chrome' to base url 'http://the-internet.herokuapp.com/login'.</msg>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-11-10T02:29:17.641323" elapsed="12.964836"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:30.608291" level="INFO">Typing text 'tomsmith' into text field 'id=username'.</msg>
+<arg>id=username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-10T02:29:30.607124" elapsed="0.096512"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:30.703852" level="INFO">Typing text 'SuperSecretPassword!' into text field 'id=password'.</msg>
+<arg>id=password</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-10T02:29:30.703730" elapsed="0.023968"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:30.727895" level="INFO">Clicking button 'css=button[type="submit"]'.</msg>
+<arg>css=button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-10T02:29:30.727794" elapsed="0.024766"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>${expected_message}</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-11-10T02:29:30.752662" elapsed="0.602910"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:31.741461" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="../results/login_success.png"&gt;&lt;img src="../results/login_success.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>${RESULT_PATH}/${screenshot_name}.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-11-10T02:29:31.355702" elapsed="0.385812"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-11-10T02:29:31.741586" elapsed="0.066429"/>
+</kw>
+<arg>tomsmith</arg>
+<arg>SuperSecretPassword!</arg>
+<arg>You logged into a secure area!</arg>
+<arg>login_success</arg>
+<status status="PASS" start="2025-11-10T02:29:17.641201" elapsed="14.166889"/>
+</kw>
+<doc>Verify user can login successfully</doc>
+<status status="PASS" start="2025-11-10T02:29:17.641012" elapsed="14.167205"/>
+</test>
+<test id="s1-t2" name="Login Failed - Wrong Password" line="29">
+<kw name="Login And Verify">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:31.808822" level="INFO">Opening browser 'chrome' to base url 'http://the-internet.herokuapp.com/login'.</msg>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-11-10T02:29:31.808735" elapsed="6.261909"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:38.071717" level="INFO">Typing text 'tomsmith' into text field 'id=username'.</msg>
+<arg>id=username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-10T02:29:38.071178" elapsed="0.084533"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:38.155955" level="INFO">Typing text 'Password!' into text field 'id=password'.</msg>
+<arg>id=password</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-10T02:29:38.155818" elapsed="0.025843"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:38.181865" level="INFO">Clicking button 'css=button[type="submit"]'.</msg>
+<arg>css=button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-10T02:29:38.181758" elapsed="0.025382"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>${expected_message}</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-11-10T02:29:38.207239" elapsed="0.671358"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:38.990641" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="../results/login_failed_wrong_password.png"&gt;&lt;img src="../results/login_failed_wrong_password.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>${RESULT_PATH}/${screenshot_name}.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-11-10T02:29:38.878729" elapsed="0.111973"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-11-10T02:29:38.990787" elapsed="0.068833"/>
+</kw>
+<arg>tomsmith</arg>
+<arg>Password!</arg>
+<arg>Your password is invalid!</arg>
+<arg>login_failed_wrong_password</arg>
+<status status="PASS" start="2025-11-10T02:29:31.808590" elapsed="7.251137"/>
+</kw>
+<doc>Verify error message when password is incorrect</doc>
+<status status="PASS" start="2025-11-10T02:29:31.808357" elapsed="7.251518"/>
+</test>
+<test id="s1-t3" name="Login Failed - Username Not Found" line="33">
+<kw name="Login And Verify">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:39.060475" level="INFO">Opening browser 'chrome' to base url 'http://the-internet.herokuapp.com/login'.</msg>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-11-10T02:29:39.060366" elapsed="12.841646"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:51.903490" level="INFO">Typing text 'tomholland' into text field 'id=username'.</msg>
+<arg>id=username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-10T02:29:51.902704" elapsed="0.095507"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:51.998475" level="INFO">Typing text 'Password!' into text field 'id=password'.</msg>
+<arg>id=password</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-10T02:29:51.998327" elapsed="0.025667"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:52.024215" level="INFO">Clicking button 'css=button[type="submit"]'.</msg>
+<arg>css=button[type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-10T02:29:52.024104" elapsed="0.025926"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>${expected_message}</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-11-10T02:29:52.050444" elapsed="0.552436"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-11-10T02:29:52.709263" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="../results/login_failed_invalid_username.png"&gt;&lt;img src="../results/login_failed_invalid_username.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>${RESULT_PATH}/${screenshot_name}.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-11-10T02:29:52.603025" elapsed="0.106321"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-11-10T02:29:52.709430" elapsed="0.069581"/>
+</kw>
+<arg>tomholland</arg>
+<arg>Password!</arg>
+<arg>Your username is invalid!</arg>
+<arg>login_failed_invalid_username</arg>
+<status status="PASS" start="2025-11-10T02:29:39.060223" elapsed="13.718858"/>
+</kw>
+<doc>Verify error message when username is invalid</doc>
+<status status="PASS" start="2025-11-10T02:29:39.060016" elapsed="13.719181"/>
+</test>
+<status status="PASS" start="2025-11-10T02:29:17.569774" elapsed="35.209672"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Login Test" id="s1" pass="3" fail="0" skip="0">Login Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

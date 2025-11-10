@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Code From Git') {
+            steps {
+                echo 'Checking out source code...'
+                // ใช้ GitHub ให้ใส่ URL ที่นี่ เช่น:
+                // git branch: 'main', url: 'https://github.com/fram/TestAutomation_Assignment.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                echo 'Installing Python dependencies from root requirement.txt'
+                sh '''
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install --upgrade pip
+                    pip install -r requirement.txt
+                '''
+            }
+        }
+
+        stage('Run Automated Script') {
+            steps {
+                echo 'Running Robot Framework test case...'
+                sh '''
+                    . venv/bin/activate
+                    robot 2_web_login_automation/login_test.robot
+                '''
+            }
+        }
+
+        stage('Send Result To Jenkins') {
+            steps {
+                echo 'Publishing test results to Jenkins...'
+                junit '2_web_login_automation/results/2_web_login_automation/output/output.xml'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Build Finished'
+        }
+    }
+}
