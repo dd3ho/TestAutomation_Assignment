@@ -2,51 +2,69 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout Code From Git') {
             steps {
-                echo 'Checking out source code...'
+                echo '📦 Checking out source code...'
                 checkout scm
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                echo 'Installing Python dependencies from root requirement.txt'
+                echo '⚙️ Installing Python dependencies from requirement.txt...'
                 sh '''
-                    if [ -d "venv" ]; then
-                        echo "Removing old virtual environment..."
-                        rm -rf venv
-                    fi
+                # Remove old virtual environment (if any)
+                if [ -d "venv" ]; then
+                    echo "Removing old virtual environment..."
+                    rm -rf venv
+                fi
 
-                    python3 -m venv venv
-                    . venv/bin/activate
+                # Create new virtual environment
+                python3 -m venv venv
+                . venv/bin/activate
 
-                    pip install --upgrade pip
-                    pip install -r requirement.txt
+                # Upgrade pip and install dependencies
+                pip install --upgrade pip
+                pip install -r requirement.txt
                 '''
             }
         }
 
-        stage('Run Test Automate') {
+        stage('Run All Tests') {
             steps {
-                echo 'Running automated tests...'
+                echo '🚀 Running all tests across folders...'
                 sh '''
-                    . venv/bin/activate
-                    robot -d 3_api_testing/output 3_api_testing/tests/users/test_user_api.robot
+                . venv/bin/activate
+
+                echo "▶ 1. Running find_duplicate.py"
+                python3 1_find_duplicate_list/find_duplicate.py || echo "⚠️ Skipped if script has no test output"
+
+                echo "▶ 2. Running Web Login Automation"
+                robot -d 2_web_login_automation/results 2_web_login_automation/login_test.robot
+
+                echo "▶ 3. Running API Testing"
+                robot -d 3_api_testing/output 3_api_testing/tests/users/test_user_api.robot
+
+                echo "▶ 4. Running Simple Cipher"
+                python3 6_simple_cipher/simple_cipher.py || echo "⚠️ Simple cipher executed (no test report)"
                 '''
             }
         }
 
-        stage('Send Result To Jenkins') {
+        stage('Publish Reports') {
             steps {
-                echo 'Publishing test results...'
+                echo '🧾 Publishing Robot Framework reports...'
+                // ต้องติดตั้ง plugin "HTML Publisher" ก่อน
                 publishHTML(target: [
-                    allowMissing: true,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
                     reportDir: '3_api_testing/output',
                     reportFiles: 'report.html',
-                    reportName: 'Robot Framework Report'
+                    reportName: 'API Testing Report'
+                ])
+                publishHTML(target: [
+                    reportDir: '2_web_login_automation/results',
+                    reportFiles: 'report.html',
+                    reportName: 'Web Login Report'
                 ])
             }
         }
@@ -54,7 +72,7 @@ pipeline {
 
     post {
         always {
-            echo 'Build Finished'
+            echo '✅ Build Finished'
         }
     }
 }
