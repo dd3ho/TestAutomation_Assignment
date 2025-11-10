@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "/opt/homebrew/bin:$PATH"
+    }
+
     stages {
 
         stage('Checkout Code From Git') {
@@ -41,6 +45,9 @@ pipeline {
                 python3 1_find_duplicate_list/find_duplicate.py || echo "⚠️ Skipped if script has no test output"
 
                 echo "▶ 2. Running Web Login Automation"
+                export PATH=$PATH:/opt/homebrew/bin
+                echo "Using chromedriver from: $(which chromedriver)"
+                chromedriver --version || echo "⚠️ chromedriver not found"
                 robot -d 2_web_login_automation/results 2_web_login_automation/login_test.robot
 
                 echo "▶ 3. Running API Testing"
@@ -55,7 +62,6 @@ pipeline {
         stage('Publish Reports') {
             steps {
                 echo '🧾 Publishing Robot Framework reports...'
-                // ต้องติดตั้ง plugin "HTML Publisher" ก่อน
                 publishHTML(target: [
                     reportDir: '3_api_testing/output',
                     reportFiles: 'report.html',
